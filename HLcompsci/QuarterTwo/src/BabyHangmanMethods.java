@@ -65,30 +65,54 @@ public class BabyHangmanMethods {
 		inputStream.close();
 		return line;
 	}
+	String word;
 	JButton [] buttons = new JButton[7];
+	String [] lets;
+	boolean [] guessed = new boolean[7];
+	boolean [] index_used;
 	public void makeButtons(){
-		int random = (int)(Math.random() * 5);
-		String word = read_from_line(random);
+		int random = (int)(Math.random() * 6 + 1);
+		System.out.println("random =" + random);
+		word = read_from_line(random);
+		System.out.println(word);
+		index_used = new boolean[7];
+		for(int i = 0; i < index_used.length; i++){
+			index_used[i] = false;
+		}
+		lets = new String[word.length()];
 		int index = 0;
 		for(int i = 0; i < buttons.length; i++){
+			int ran =(int)(Math.random()*7 );
+			
+			while(index_used[ran]){
+				ran  =(int)(Math.random()*7 );
+				//.println("" +System.out ran);
+			}
+			index_used[ran] = true;
+			guessed[i] = false;
 			try{
-			buttons[i] = new JButton("" + word.charAt(index));
+			
+			
+			
+			buttons[ran] = new JButton("" + word.charAt(i));
+			lets[i] = buttons[ran].getActionCommand();
 			index++;
 			
 			}catch(StringIndexOutOfBoundsException ex){
-				int ran = (int)(Math.random() * 15);
+	
 				boolean unused = true;
-				for(int b = 0; b < i; b++){
-					if((""+letters.charAt(ran)).equals(buttons[b].getActionCommand())){
+				int rannum = (int)(Math.random()*15);
+				for(int b = 0; b < lets.length; b++){
+					if((""+letters.charAt(rannum)).equals(lets[b])){
 						unused = false;
 					}
 					if(unused == false){
-						ran = (int)(Math.random() * 15);
+						rannum = (int)(Math.random() * 15);
 						b = 0;
 						unused = true;
 					}
 				}
-				buttons[i] = new JButton("" + letters.charAt(ran));
+				buttons[ran] = new JButton("" + letters.charAt(rannum));
 			}
 		} 
 			
