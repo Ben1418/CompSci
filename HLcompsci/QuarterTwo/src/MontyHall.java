@@ -7,6 +7,7 @@ public class MontyHall extends JOptionPane{
 		boolean playing = true;
 		String[] doors = {"Door 1", "Door 2", "Door 3"};
 		while(playing){
+			int tgames = Integer.parseInt(JOptionPane.showInputDialog("How many games would you like to run?"));
 			int cdoor = (int)(Math.random()*3);
 			int g1 = JOptionPane.showOptionDialog(null, "What door do you choose?", "G1", DEFAULT_OPTION, QUESTION_MESSAGE, null, doors, 0);
 			System.out.println("cdoor "+(cdoor+1));
